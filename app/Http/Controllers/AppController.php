@@ -15,7 +15,6 @@ class AppController extends BaseController
      */
     public function getIndex()
     {
-        $a = view('app.index');
         return view('app.index');
     }
 

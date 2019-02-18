@@ -12,6 +12,8 @@
         <p>Please confirm your email address.</p>
 
         <p><a href="{{ $confirmUrl }}">Confirm email address</a></p>
-        <p>{{ $confirmUrl }}</p>
+        <p>
+            {{ $confirmUrl }}
+        </p>
     </body>
 </html>

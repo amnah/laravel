@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
@@ -134,7 +135,7 @@ class AuthController extends BaseController
         $user = User::create([
             'email' => $data['email'],
             'username' => $data['username'],
-            'password' => bcrypt($data['password'], config('auth.passwords.users.bcryptOptions')),
+            'password' => Hash::make($data['password']),
             'confirmation' => $this->emailConfirmation ? Str::random(60) : null,
         ]);
         event(new Registered($user));
@@ -287,7 +288,7 @@ class AuthController extends BaseController
         }
 
         // update password and log user in
-        $password = bcrypt($request->get('password'), config('auth.passwords.users.bcryptOptions'));
+        $password = Hash::make($request->get('password'));
         $user->setAttribute('password', $password)->confirmEmail();
         $this->guard()->login($user);
 
