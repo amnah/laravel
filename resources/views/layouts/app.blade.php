@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- CSRF Token -->
+    <!--<meta name="csrf-token" content="{{ csrf_token() }}">-->
 
     <!-- Fonts -->
     {{--<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">--}}
@@ -19,9 +22,20 @@
     </div>
 
     <div class="topnav">
-        <a href="#">Link</a>
-        <a href="#">Link</a>
-        <a href="#">Link</a>
+        <a href="/">Home</a>
+        @if (auth()->check())
+            <a href="/account">Account</a>
+            <a>
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit">Logout ({{ auth()->user()->email }})</button>
+            </form>
+            </a>
+        @else
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        @endif
+
     </div>
 
     <div id="content">

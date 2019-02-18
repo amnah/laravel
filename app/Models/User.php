@@ -3,15 +3,27 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $password
+ * @property string|null $confirmation
+ * @property string|null $remember_token
+ * @property string $created_at
+ * @property string $updated_at
+ *
+ * @property PasswordReset[] $password_resets
+ */
 class User extends BaseModel implements
     AuthenticatableContract,
     AuthorizableContract,
@@ -25,7 +37,7 @@ class User extends BaseModel implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password', 'confirmation'
     ];
 
     /**
@@ -38,11 +50,29 @@ class User extends BaseModel implements
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * The related password reset models
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function password_resets()
+    {
+        return $this->hasMany(PasswordReset::class);
+    }
+
+    /**
+     * Check if user has confirmed his email address
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->getAttribute('confirmation') === null;
+    }
+
+    /**
+     * Confirm email address
+     * return $this
+     */
+    public function confirmEmail()
+    {
+        $this->setAttribute('confirmation', null)->save();
+        return $this;
+    }
 }

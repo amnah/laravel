@@ -96,6 +96,9 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+            'bcryptOptions' => [
+                'rounds' => 13,
+            ],
         ],
     ],
 
