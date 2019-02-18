@@ -17,14 +17,4 @@ class AppController extends BaseController
     {
         return view('app.index');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getHome()
-    {
-        return view('app.home');
-    }
 }
