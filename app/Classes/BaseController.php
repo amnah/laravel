@@ -25,8 +25,8 @@ class BaseController extends Controller
         // check $_GET and $_COOKIE
         // enable by manually entering the url "http://example.com?<password>"
         $cookieName = '_forceDebug';
-        $cookieExpire = env('APP_ENV') == 'production' ? 60*15 : 60*60*24; // 15 minutes for production, 1 day for others
-        $debugPassword = env('DEBUGBAR_PASSWORD');
+        $cookieExpire = app()->environment('production') ? 60*15 : 60*60*24; // 15 minutes for production, 1 day for others
+        $debugPassword = config('debugbar.password');
         $isGetSet = isset($_GET[$debugPassword]);
         $isCookieSet = (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName] === $debugPassword);
 
