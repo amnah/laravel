@@ -15,7 +15,7 @@ class BaseController extends Controller
     public function __construct()
     {
         // check if debugbar should be enabled via $_GET/$_COOKIE param
-        if (!Debugbar::enabled() && $this->checkEnableDebugbar()) {
+        if (!Debugbar::isEnabled() && $this->checkEnableDebugbar()) {
             Debugbar::enable();
         }
     }
