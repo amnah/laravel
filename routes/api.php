@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 /*
+// make sure to uncomment mapApiRoutes() in app/Providers/RouteServiceProvider
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
