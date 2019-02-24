@@ -258,13 +258,8 @@ class AuthController extends BaseController
     public function showResetForm(Request $request, $token)
     {
         $passwordReset = PasswordReset::getByToken($token);
-        $email = '';
-        if ($passwordReset) {
-            $email = User::where('id', $passwordReset->user_id)->value('email');
-        }
         return view('auth.reset')->with([
             'passwordReset' => $passwordReset,
-            'email' => $email,
         ]);
     }
 
