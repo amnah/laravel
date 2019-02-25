@@ -7,10 +7,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Email Confirmation</div>
                 <div class="panel-body">
-                    @if ($status)
+                    @if ($success)
                         <div class="alert alert-success">
-                            <p>{!! $status !!}</p>
-                            <p><a href="{{ url('login') }}">Log in here</a></p>
+                            <p>{!! $success !!}</p>
+                            <p><a href="/">Go home</a></p>
                         </div>
                     @else
                         <div class="alert alert-danger">

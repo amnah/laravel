@@ -5,11 +5,11 @@
     <div class="column">
         <h2>Welcome</h2>
         <h3>Quick links</h3>
-        <p><a href="{{ url('/') }}">Home</a></p>
-        <p><a href="{{ url('/account') }}">Account</a></p>
-        <p><a href="{{ url('/login') }}">Login</a></p>
-        <p><a href="{{ url('/forgot') }}">Forgot</a></p>
-        <p><a href="{{ url('/register') }}">Register</a></p>
+        <p><a href="/auth/login">Login</a></p>
+        <p><a href="/auth/forgot">Forgot</a></p>
+        <p><a href="/auth/register">Register</a></p>
+
+        <p><a href="/account">Account</a></p>
     </div>
 </div>
 @endsection

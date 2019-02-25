@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @property int $id
@@ -29,21 +30,17 @@ class User extends BaseModel implements
     use Authenticatable, Authorizable, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * @inheritdoc
      */
     protected $fillable = [
-        'username', 'email', 'password', 'confirmation'
+        'username', 'email', 'confirmation'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * @inheritdoc
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'confirmation', 'remember_token',
     ];
 
     /**
@@ -52,6 +49,26 @@ class User extends BaseModel implements
     public function password_resets()
     {
         return $this->hasMany(PasswordReset::class);
+    }
+
+    /**
+     * Get password rules for validation
+     * @return string
+     */
+    public static function passwordRules()
+    {
+        return 'required|string|min:3|confirmed';
+    }
+
+    /**
+     * Set password (hashed)
+     * @param string $password
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $hashed = Hash::make($password);
+        return $this->setAttribute('password', $hashed);
     }
 
     /**

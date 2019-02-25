@@ -35,8 +35,8 @@ class EmailConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.emailConfirmation')->with([
-            "confirmUrl" => url('confirm', [$this->user->email, $this->user->confirmation])
+        return $this->view('emails.emailConfirmation', [
+            "confirmUrl" => url('auth/confirm', [$this->user->email, $this->user->confirmation])
         ]);
     }
 }

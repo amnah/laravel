@@ -7,17 +7,18 @@
             <div class="panel {{ empty($passwordReset) ? 'panel-danger' : 'panel-default' }}">
                 <div class="panel-heading">Reset Password</div>
 
-                @if (empty($passwordReset))
-                    <div class="panel-body">
-                        <p>Invalid token</p>
-                    </div>
-                @elseif (session('status'))
+                @if (!empty($success))
                     <div class="alert alert-success">
-                        {{ session('status') }}
+                        <p>{{ $success }}</p>
+                        <p><a href="/auth/login">Login here</a></p>
+                    </div>
+                @elseif (empty($passwordReset))
+                    <div class="panel-body">
+                        {{ __('passwords.token') }}
                     </div>
                 @else
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/reset/{$passwordReset->token}") }}">
+                        <form class="form-horizontal" role="form" method="POST">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -38,7 +39,7 @@
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required>
+                                    <input id="password" type="password" class="form-control" name="password" value="{{ request()->get('password') }}" required>
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -51,7 +52,7 @@
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ request()->get('password_confirmation') }}" required>
 
                                     @if ($errors->has('password_confirmation'))
                                         <span class="help-block">

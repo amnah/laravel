@@ -26,14 +26,14 @@
         @if (auth()->check())
             <a href="/account">Account</a>
             <a>
-            <form action="/logout" method="post">
+            <form action="/auth/logout" method="post">
                 @csrf
                 <button type="submit">Logout ({{ auth()->user()->email }})</button>
             </form>
             </a>
         @else
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a href="/auth/login">Login</a>
+            <a href="/auth/register">Register</a>
         @endif
 
     </div>

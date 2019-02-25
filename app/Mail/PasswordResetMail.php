@@ -44,7 +44,7 @@ class PasswordResetMail extends Mailable
     public function build()
     {
         return $this->view('emails.passwordReset')->with([
-            "resetUrl" => url('reset', $this->passwordReset->token)
+            "resetUrl" => url('auth/reset', $this->passwordReset->token)
         ]);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,16 +15,16 @@
 
 Route::get('/', 'AppController@getIndex');
 
-Route::get('login', 'AuthController@showLoginForm');
-Route::post('login', 'AuthController@login');
-Route::post('logout', 'AuthController@logout');
-Route::get('register', 'AuthController@showRegistrationForm');
-Route::post('register', 'AuthController@register');
-Route::get('confirm/{email}/{confirmation}', 'AuthController@confirm');
-Route::get('forgot', 'AuthController@showLinkRequestForm');
-Route::post('forgot', 'AuthController@sendResetLinkEmail');
-Route::get('reset/{token}', 'AuthController@showResetForm');
-Route::post('reset/{token}', 'AuthController@reset');
+Route::get('auth/login', 'AuthController@getLogin');
+Route::post('auth/login', 'AuthController@postLogin');
+Route::post('auth/logout', 'AuthController@postLogout');
+Route::get('auth/register', 'AuthController@getRegister');
+Route::post('auth/register', 'AuthController@postRegister');
+Route::get('auth/confirm/{email}/{confirmation}', 'AuthController@getConfirm');
+Route::get('auth/forgot', 'AuthController@getForgot');
+Route::post('auth/forgot', 'AuthController@postForgot');
+Route::get('auth/reset/{token}', 'AuthController@getReset');
+Route::post('auth/reset/{token}', 'AuthController@postReset');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/account', 'AppController@getAccount');
