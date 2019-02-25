@@ -2074,11 +2074,13 @@ if (typeof(PhpDebugBar) == 'undefined') {
                 }
 
                 li.css('cursor', 'pointer').click(function() {
+                    /*
                     if (table.is(':visible')) {
                         table.hide();
                     } else {
                         table.show();
                     }
+                    */
                 });
             }});
             this.$list.$el.appendTo(this.$el);

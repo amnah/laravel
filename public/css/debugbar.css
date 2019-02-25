@@ -852,7 +852,7 @@ div.phpdebugbar-widgets-messages div.phpdebugbar-widgets-toolbar a.phpdebugbar-w
 }
 
 ul.phpdebugbar-widgets-list li.phpdebugbar-widgets-list-item {
-    padding: 15px 10px;
+    padding: 3px 10px;
     border: none;
     font-family: inherit;
     overflow: visible;
