@@ -45,8 +45,8 @@
     <?php if (app()->has('debugbar') && app()->get('debugbar')->isEnabled()): ?>
         <link rel='stylesheet' type='text/css' property='stylesheet' href='/css/debugbar.css'>
         <script type='text/javascript' src="/js/debugbar.js"></script>
-        @if app('router')->has('debugbar.openhandler')
-            <?= debugbar()->getJavascriptRenderer()->setOpenHandlerUrl(route('debugbar.openhandler'))->render() ?>
+        @if (app('router')->has('debugbar.openhandler'))
+            {{ debugbar()->getJavascriptRenderer()->setOpenHandlerUrl(route('debugbar.openhandler'))->render() }}
         @endif
     <?php endif; ?>
 </body>
