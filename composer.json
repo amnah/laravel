@@ -29,7 +29,11 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-debugbar",
+                "laravel/nexmo-notification-channel",
+                "laravel/slack-notification-channel"
+            ]
         }
     },
     "autoload": {

@@ -42,7 +42,7 @@
         @yield('content')
     </div>
 
-    <?php if (Debugbar::isEnabled()): ?>
+    <?php if (app()->has('debugbar') && app()->get('debugbar')->isEnabled()): ?>
         <link rel='stylesheet' type='text/css' property='stylesheet' href='/css/debugbar.css'>
         <script type='text/javascript' src="/js/debugbar.js"></script>
         <?= debugbar()->getJavascriptRenderer()->setOpenHandlerUrl(route('debugbar.openhandler'))->render() ?>
