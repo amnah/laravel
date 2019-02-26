@@ -19,9 +19,6 @@ return [
         'telescope*'
     ],
 
-    // set password to force enable debugbar
-    'password' => env('DEBUGBAR_PASSWORD'),
-
     /*
      |--------------------------------------------------------------------------
      | Storage settings

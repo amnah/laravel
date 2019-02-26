@@ -46,7 +46,7 @@
         <link rel='stylesheet' type='text/css' property='stylesheet' href='/css/debugbar.css'>
         <script type='text/javascript' src="/js/debugbar.js"></script>
         @if (app('router')->has('debugbar.openhandler'))
-            {{ debugbar()->getJavascriptRenderer()->setOpenHandlerUrl(route('debugbar.openhandler'))->render() }}
+            <?= debugbar()->getJavascriptRenderer()->setOpenHandlerUrl(route('debugbar.openhandler'))->render() ?>
         @endif
     <?php endif; ?>
 </body>
