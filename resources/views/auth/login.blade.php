@@ -53,7 +53,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/forgot') }}">
+                                <a class="btn btn-link" href="/auth/forgot">
                                     Forgot Your Password?
                                 </a>
                             </div>
