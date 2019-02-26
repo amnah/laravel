@@ -37,7 +37,6 @@ class AuthController extends BaseController
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'postLogout']);
-        return parent::__construct();
     }
 
     /**
