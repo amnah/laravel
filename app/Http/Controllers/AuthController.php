@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
 
 class AuthController extends BaseController
 {
@@ -166,7 +167,7 @@ class AuthController extends BaseController
         $user = new User([
             'email' => $data['email'],
             'username' => $data['username'],
-            'confirmation' => $this->emailConfirmation ? str_random(60) : null,
+            'confirmation' => $this->emailConfirmation ? Str::random(60) : null,
         ]);
         $user->setPassword($data['password'])->save();
 
