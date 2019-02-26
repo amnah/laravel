@@ -27,6 +27,7 @@ class DebugbarServiceProvider extends ServiceProvider
         }
 
         // store result and call parent
+        $this->app->get('config')->set('debugbar.enabled', $enabled);
         $this->enabled = $enabled;
         if ($enabled) {
             parent::register();
@@ -62,6 +63,7 @@ class DebugbarServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        usleep(1);
         if ($this->enabled) {
             parent::boot();
         }
