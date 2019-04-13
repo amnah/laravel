@@ -191,10 +191,10 @@ class AuthController extends BaseController
         // find and confirm user
         /** @var User $user */
         $success = null;
-        $user = User::where([
-            'email' => $email,
-            'confirmation' => $confirmation,
-        ])->first();
+        $user = User::query()
+            ->where('email', $email)
+            ->where('confirmation', $confirmation)
+            ->first();
         if ($user) {
             $user->confirmEmail();
             auth()->login($user);
@@ -229,7 +229,7 @@ class AuthController extends BaseController
 
         // check for valid user
         $email = $request->get('email');
-        $user = User::where("email", $email)->first();
+        $user = User::query()->where("email", $email)->first();
         if (!$user) {
             // send fake success response for security
             //return view('auth/forgot', ['success' => __('passwords.sent')]);

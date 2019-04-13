@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Classes\BaseModel;
 
-use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 /**
@@ -50,9 +49,10 @@ class PasswordReset extends BaseModel
     public static function getByToken($token)
     {
         // check for token that hasn't been consumed and hasn't expired yet
-        $expire = config('auth.passwords.users.expire');
-        $afterTime = (new Carbon())->subMinutes($expire);
-        return static::where('token', $token)
+        $expireMinutes = config('auth.passwords.users.expire');
+        $afterTime = date("Y-m-d H:i:s", strtotime("-60 $expireMinutes"));
+        return static::query()
+            ->where('token', $token)
             ->where('consumed_at', null)
             ->where('created_at', '>=', $afterTime)
             ->first();
@@ -75,7 +75,7 @@ class PasswordReset extends BaseModel
         $token = Str::random(60);
         $passwordReset->forceFill([
             'token' => $token,
-            'created_at' => new Carbon(),
+            'created_at' => date("Y-m-d H:i:s"),
         ])->save();
 
         return $passwordReset;
