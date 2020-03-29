@@ -1,5 +1,6 @@
 <?php
 
+// compute best available hash driver
 $driver = 'bcrypt';
 if (defined('PASSWORD_ARGON2ID')) {
     $driver = 'argon2id';
@@ -36,7 +37,7 @@ return [
     */
 
     'bcrypt' => [
-        'rounds' => env('BCRYPT_ROUNDS', 13),
+        'rounds' => env('BCRYPT_ROUNDS', 10),
     ],
 
     /*
@@ -52,8 +53,8 @@ return [
 
     'argon' => [
         'memory' => 4096,
-        'time' => 512,
         'threads' => 2,
+        'time' => 512,
     ],
 
 ];
