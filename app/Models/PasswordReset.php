@@ -50,7 +50,7 @@ class PasswordReset extends BaseModel
     {
         // check for token that hasn't been consumed and hasn't expired yet
         $expireMinutes = config('auth.passwords.users.expire');
-        $afterTime = date("Y-m-d H:i:s", strtotime("-60 $expireMinutes"));
+        $afterTime = date("Y-m-d H:i:s", strtotime("-{$expireMinutes} minutes"));
         return static::query()
             ->where('token', $token)
             ->where('consumed_at', null)
